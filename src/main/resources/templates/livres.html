@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Liste des Livres</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-cWnwyN/JW9JG10kP3+3GJ1GnSI1kxDw6loM//55S/2/6B/e6FfP4h6I4jYOw9vxYSsKnYi8kWmb1Zz0t8OKK9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Votre fichier CSS personnalisé -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div th:include="navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2>Liste des Livres</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Titre</th>
+            <th>Date de sortie</th>
+            <th>Auteur</th>
+            <th>Disponible</th>
+            <th>Etudiant</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Utilisation de Thymeleaf pour boucler sur la liste d'étudiants -->
+        <tr th:each="livre : ${livres}">
+            <td th:text="${livre.isbn}"></td>
+            <td th:text="${livre.titre}"></td>
+            <td th:text="${livre.dateDeSortie}"></td>
+            <td th:text="${livre.auteurDto.nom + ' ' + livre.auteurDto.prenom}"></td>
+            <td th:text="${livre.dispoValue}"></td>
+            <span th:if="${livre.disponible}"><td>Aucun</td></span><span th:unless="${livre.disponible}"><td th:text="${livre.etudiantDto.cne}"></td></span>
+            <td th:text="${livre.description}"></td>
+            <td>
+                <a th:href="@{/livre/{isbn}(isbn=${livre.isbn})}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-info-circle"></i>
+                </a>
+               <a th:href="@{/livre/modifier/{isbn}(isbn=${livre.isbn})}" class="btn btn-warning btn-sm">
+                   <i class="fas fa-edit"></i>
+               </a>
+                <a th:href="@{/livre/supprimer/{isbn}(isbn=${livre.isbn})}" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-primary" th:href="@{/livre/formulaire}" role="button">Ajouter Livre</a>
+                <a class="btn btn-primary" th:href="@{/home}" role="button">Retour</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript (jQuery inclus) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Votre fichier JavaScript personnalisé -->
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

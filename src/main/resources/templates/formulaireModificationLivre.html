@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier Livre</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Votre fichier CSS personnalisé -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:include="navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2>Formulaire de modification de Livre</h2>
+
+    <form id="livreForm" th:action="@{/livre/modifier}" method="post" enctype="multipart/form-data">
+        <!-- ... Autres champs du formulaire ... -->
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input type="text" class="form-control" id="isbn" th:field="*{livre.isbn}" disabled>
+            <input type="hidden" th:field="*{livre.isbn}" />
+        </div>
+
+        <!-- Titre -->
+        <div class="form-group">
+            <label for="titre">Titre:</label>
+            <input type="text" class="form-control" id="titre" th:field="*{livre.titre}" required>
+        </div>
+
+        <!-- Date de Sortie -->
+        <div class="form-group">
+            <label for="dateDeSortie">Date de Sortie:</label>
+            <input type="text" class="form-control" id="dateDeSortie" th:field="*{livre.dateDeSortie}" required>
+            <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" id="description" th:field="*{livre.description}" required>
+            <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+        </div>
+
+        <div class="form-group">
+            <label for="auteur">Auteur:</label>
+            <select class="form-control" id="auteur" name="auteurId" >
+                <!-- Utilisez Thymeleaf pour parcourir la liste d'auteurs et générer les options -->
+                <option th:each="auteur : ${listeAuteurs}" th:value="${auteur.id}"
+                        th:text="${auteur.nom + ' ' + auteur.prenom}" th:selected="${auteur.id == livre.auteurDto.id}"></option>
+            </select>
+        </div>
+
+        <!-- Étudiant (champ de sélection) -->
+        <div>
+            <label for="etudiant">Étudiant:</label>
+            <select class="form-control" id="etudiant" name="etudiantId" >
+                <option th:each="etudiant : ${listeEtudiants}" th:value="${etudiant.id}" th:text="${etudiant.nom + ' ' + etudiant.prenom}"
+                        th:selected="${etudiant.id == livre.etudiantDto.id}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" name="disponible" id="disponible" checked>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <a class="btn btn-primary" th:href="@{/livre/liste}" role="button">Liste</a>
+                <a class="btn btn-primary" th:href="@{/home}" role="button">Retour</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

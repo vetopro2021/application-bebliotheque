@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Détail de Livre</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:include="navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2>Détail de Livre</h2>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Titre : <span th:text="${livre.titre}">Title</span></h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <strong>Date de Sortie: </strong> <span th:text="${livre.dateDeSortie}">Date de sortie</span>
+                </p>
+                <p class="card-text">
+                    <strong>Description: </strong> <span th:text="${livre.description}">Descrption</span>
+                </p>
+                <p class="card-text">
+                    <strong>Disponible: </strong><span th:if="${livre.disponible}">Oui</span><span th:unless="${livre.disponible}">Non</span>
+                </p>
+            </div>
+        </div><br>
+        <!-- th:href="@{'/affecter?livreId=' + ${livre.isbn} + '&etudiantId=' + ${etudiantId}}" -->
+        <a  class="btn btn-primary" th:attr="onclick='afficherPageAffectation(\'' + ${livre.isbn} + '\')'">Affecter</a>
+        <a class="btn btn-primary" th:href="@{/livre/liste}">Retour</a>
+        <div id="affectationDiv"></div>
+        </div>
+</div>
+</body>
+</html>
+
+
+
+
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+// Fonction pour afficher la page d'affectation
+function afficherPageAffectation(livreId) {
+    console.log("livre id = ",livreId);
+    // Charger la page d'affectation dans la div spécifiée
+    $('#affectationDiv').load('/livre/affectation?livreId=' + livreId, function() {
+        // La page est chargée, afficher la div d'affectation
+
+        // Fonction pour valider l'affectation
+        function validerAffectation() {
+            // Récupérer les valeurs sélectionnées
+            var etudiantId = $('#etudiantSelect').val();
+            console.log("etudiant Id =" + etudiantId + " Livre id =" + livreId);
+
+            // Envoyer les données au serveur pour la mise à jour
+            // Utilisez AJAX pour envoyer les données au backend (Spring Boot)
+
+            // Exemple d'AJAX (à adapter selon votre structure backend)
+            $.ajax({
+                type: 'POST',
+                url: '/livre/affecter', // Endpoint de validation de l'affectation
+                data: { livreId: livreId, etudiantId: etudiantId },
+                success: function(response) {
+                    // Mettre à jour l'interface utilisateur si nécessaire
+                    // Cacher la div d'affectation
+                    $('#affectationDiv').hide();
+                },
+                error: function(error) {
+                    console.error('Erreur lors de l\'affectation:', error);
+                }
+            });
+        }
+
+        // Attacher la fonction validerAffectation au clic du bouton "Valider"
+        $('#affectationDiv').on('click', '#validerButton', validerAffectation);
+
+        // Afficher la div d'affectation
+        $('#affectationDiv').show();
+    });
+}
+
+$(document).ready(function() {
+    // Votre code jQuery ici
+});
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Formulaire d'Enregistrement de Livre</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Votre fichier CSS personnalisé -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div th:include="navbar :: navbar"></div>
+<div class="container mt-5">
+  <h2>Formulaire d'Enregistrement de Livre</h2>
+
+  <form id="livreForm" th:action="@{/livre/enregistrer}" method="post" enctype="multipart/form-data"d>
+    <!-- ISBN -->
+    <div class="form-group">
+      <label for="isbn">ISBN:</label>
+      <input type="text" class="form-control" id="isbn" name="isbn" required>
+    </div>
+    <!-- Titre -->
+    <div class="form-group">
+      <label for="titre">Titre:</label>
+      <input type="text" class="form-control" id="titre" name="titre" required>
+    </div>
+    <!-- Date de Sortie -->
+    <div class="form-group">
+      <label for="dateDeSortie">Date de Sortie:</label>
+      <input type="text" class="form-control" id="dateDeSortie" name="dateDeSortie" required>
+      <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" id="description" name="description" required>
+      <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+    </div>
+
+    <div class="form-group">
+      <label for="auteur">Auteur:</label>
+      <select class="form-control" id="auteur" name="auteurId" required>
+        <!-- Utilisez Thymeleaf pour parcourir la liste d'auteurs et générer les options -->
+        <option th:each="auteur : ${listeAuteurs}" th:value="${auteur.id}" th:text="${auteur.nom + ' ' + auteur.prenom}"></option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <input type="checkbox" name="disponible" id="disponible" checked>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a class="btn btn-primary" th:href="@{/livre/liste}" role="button">Liste</a>
+        <a class="btn btn-primary" th:href="@{/home}" role="button">Retour</a>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+<!-- Bootstrap JavaScript (jQuery inclus) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Votre fichier JavaScript personnalisé -->
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

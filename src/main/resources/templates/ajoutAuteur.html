@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Formulaire d'Enregistrement d'Auteur</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Votre fichier CSS personnalisé -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div th:include="navbar :: navbar"></div>
+<div class="container mt-5">
+  <h2>Formulaire d'Enregistrement d'Auteur</h2>
+
+  <form id="livreForm" th:action="@{/auteur/enregistrer}" method="post" enctype="multipart/form-data"d>
+
+    <!-- ISBN -->
+    <div class="form-group">
+      <label for="nom">Nom:</label>
+      <input type="text" class="form-control" id="nom" name="nom" required>
+    </div>
+
+    <!-- Titre -->
+    <div class="form-group">
+      <label for="prenom">Prenom:</label>
+      <input type="text" class="form-control" id="prenom" name="prenom" required>
+    </div>
+
+    <!-- Date de Sortie -->
+    <div class="form-group">
+      <label for="nationalite">Nationalité:</label>
+      <input type="text" class="form-control" id="nationalite" name="nationalite" required>
+      <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+    </div>
+
+
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a class="btn btn-primary" th:href="@{/auteur/liste}" role="button">Liste</a>
+        <a class="btn btn-primary" th:href="@{/home}" role="button">Retour</a>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+<!-- Bootstrap JavaScript (jQuery inclus) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Votre fichier JavaScript personnalisé -->
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

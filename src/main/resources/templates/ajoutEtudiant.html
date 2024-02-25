@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Formulaire d'Enregistrement d'Étudiant</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Votre fichier CSS personnalisé -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div th:include="navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2>Formulaire d'Enregistrement d'Étudiant</h2>
+
+    <form id="etudiantForm" th:action="@{/etudiant/enregistrer}" method="post" enctype="multipart/form-data">
+
+        <!-- CNE -->
+        <div class="form-group">
+            <label for="cne">CNE:</label>
+            <input type="text" class="form-control" id="cne" name="cne" required>
+        </div>
+        <!-- Nom -->
+        <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input type="text" class="form-control" id="nom" name="nom" required>
+        </div>
+        <!-- Prénom -->
+        <div class="form-group">
+            <label for="prenom">Prénom:</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" required>
+        </div>
+
+        <!-- Age -->
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" class="form-control" id="age" name="age" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <!-- Date d'Entrée à l'École -->
+        <div class="form-group">
+            <label for="dateEntreeEcole">Date d'Entrée à l'École:</label>
+            <input type="text" class="form-control" id="dateEntreeEcole" name="dateEntreeEcole" required>
+            <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+        </div>
+
+        <!-- Année Scolaire Actuelle -->
+        <div class="form-group">
+            <label for="anneeScolaireActuelle">Année Scolaire Actuelle:</label>
+            <input type="text" class="form-control" id="anneeScolaireActuelle" name="anneeScolaireActuelle" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+
+<!-- Bootstrap JavaScript (jQuery inclus) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Votre fichier JavaScript personnalisé -->
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

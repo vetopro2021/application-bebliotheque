@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Liste des Étudiants</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet"  th:href="@{webjars/font-awesome/5.15.2/css/all.css}" type="text/css" />
+
+  <!-- Votre fichier CSS personnalisé -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div th:include="navbar :: navbar"></div>
+<div th:if="${successMessage}" class="alert alert-success" role="alert">
+  <strong>Success!</strong> <span th:text="${successMessage}"></span>
+</div>
+
+<!-- Vérifier la présence d'un message d'erreur et l'afficher -->
+<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+  <strong>Error!</strong> <span th:text="${errorMessage}"></span>
+</div>
+<div class="container mt-5">
+  <h2>Liste des Étudiants</h2>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>CNE</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Âge</th>
+      <th>Email</th>
+      <th>Date d'Entrée à l'École</th>
+      <th>Année Scolaire Actuelle</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Utilisation de Thymeleaf pour boucler sur la liste d'étudiants -->
+    <tr th:each="etudiant : ${etudiants}">
+      <td th:text="${etudiant.cne}"></td>
+      <td th:text="${etudiant.nom}"></td>
+      <td th:text="${etudiant.prenom}"></td>
+      <td th:text="${etudiant.age}"></td>
+      <td th:text="${etudiant.email}"></td>
+      <td th:text="${etudiant.dateEntreeEcole}"></td>
+      <td th:text="${etudiant.anneeScolaireActuelle}"></td>
+      <td>
+        <a th:href="@{/etudiant/{cne}(cne=${etudiant.cne})}" class="btn btn-primary btn-sm">
+          <i class="fas fa-info-circle"></i>
+        </a>
+        <a th:href="@{/etudiant/modifier/{cne}(cne=${etudiant.cne})}" class="btn btn-warning btn-sm">
+          <i class='fas fa-pencil-alt'></i>
+        </a>
+        <a th:href="@{/etudiant/supprimer/{cne}(cne=${etudiant.cne})}" class="btn btn-danger btn-sm">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="btn-group">
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-primary" th:href="@{/etudiant/formulaire}" role="button">Ajouter Etudiant</a>
+        <a class="btn btn-primary" th:href="@{/home}" role="button">Retour</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JavaScript (jQuery inclus) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<!-- Votre fichier JavaScript personnalisé -->
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

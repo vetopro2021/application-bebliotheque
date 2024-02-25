@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier Etudiant</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Votre fichier CSS personnalisé -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:include="navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2>Formulaire de modification de l'Etudiant</h2>
+
+    <form id="etudiantForm" th:action="@{/etudiant/modifier}" method="post" enctype="multipart/form-data">
+        <!-- ... Autres champs du formulaire ... -->
+        <div class="form-group">
+            <label for="cne">CNE:</label>
+            <input type="text" class="form-control" id="cne" th:field="*{etudiant.cne}" disabled>
+            <input type="hidden" th:field="*{etudiant.cne}" />
+        </div>
+
+
+        <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input type="text" class="form-control" id="nom" th:field="*{etudiant.nom}" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="prenom">Prenom:</label>
+            <input type="text" class="form-control" id="prenom" th:field="*{etudiant.prenom}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" class="form-control" id="age" th:field="*{etudiant.age}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" th:field="*{etudiant.email}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dateEntreeEcole">Date d'Entrée:</label>
+            <input type="text" class="form-control" id="dateEntreeEcole" th:field="*{etudiant.dateEntreeEcole}" required>
+            <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+        </div>
+
+        <div class="form-group">
+            <label for="anneeScolaireActuelle">Année Scolaire</label>
+            <input type="text" class="form-control" id="anneeScolaireActuelle" th:field="*{etudiant.anneeScolaireActuelle}" required>
+            <!-- Utilisez un sélecteur de date approprié ici (jQuery UI DatePicker, par exemple) -->
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <a class="btn btn-primary" th:href="@{/etudiant/liste}" role="button">Liste</a>
+                <a class="btn btn-primary" th:href="@{/home}" role="button">Retour</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
